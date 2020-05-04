@@ -7,7 +7,7 @@ import { auth } from "../../firebase/firebase";
 class UserInfo extends Component {
   render() {
     const user = auth.currentUser;
-    const photoURL = user.photoURL;
+    const photoURL = (user!==null)?user.photoURL:'https://image.aladin.co.kr/Community/myface/pt_7489181011320609.jpeg';
     const userMenuOptions = (
       <ul className="gx-user-popover">
         <li>My Account</li>

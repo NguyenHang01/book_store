@@ -3,7 +3,6 @@ import { Col, Row, Form } from "antd";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { auth } from "../../firebase/firebase";
 import CardBox from "../CardBox/index";
 import firebase from "firebase";
 import BookItem from "../BookItem";
@@ -23,6 +22,8 @@ class ListBanChay extends Component {
       timestampsInSnapshots: true
     });
     db.collection("sach")
+      .orderBy("da_ban", "desc")
+      .limit(15)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -41,12 +42,12 @@ class ListBanChay extends Component {
     const { bestSellerList } = this.state;
     const options1 = {
       dots: true,
-      infinite: true,
+      infinite: false,
       speed: 400,
       marginLeft: 5,
       marginRight: 5,
-      slidesToShow: 5,
-      slidesToScroll: 1,
+      slidesToShow: 6,
+      slidesToScroll: 1
     };
 
     return (
@@ -57,7 +58,7 @@ class ListBanChay extends Component {
               <Slider {...options1}>
                 {bestSellerList.map(book => (
                   <div key={book.id}>
-                    <BookItem book={book} grid/>
+                    <BookItem book={book} grid />
                   </div>
                 ))}
               </Slider>
