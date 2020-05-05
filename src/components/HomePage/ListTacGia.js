@@ -5,48 +5,45 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardBox from "../CardBox/index";
 import firebase from "firebase";
-import BookItem from "../BookItem";
+import TacGiaItem from "./TacGiaItem";
 
-class ListBanChay extends Component {
+class ListTacGia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bestSellerList: []
+      list_tac_gia: []
     };
   }
 
   componentDidMount() {
-    let bestSellerList = [];
+    let list_tac_gia = [];
     const db = firebase.firestore();
     db.settings({
       timestampsInSnapshots: true
     });
-    db.collection("sach")
-      .orderBy("da_ban", "desc")
-      .limit(15)
+    db.collection("tac-gia")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
           let data = doc.data();
           data.id = doc.id;
-          bestSellerList.push(data);
+          list_tac_gia.push(data);
         });
-        this.setState({ bestSellerList: bestSellerList });
+        this.setState({ list_tac_gia: list_tac_gia });
       })
       .catch(err => {
         console.log("Error getting documents", err);
       });
   }
   render() {
-    console.log(this.state.bestSellerList);
-    const { bestSellerList } = this.state;
+    const { list_tac_gia } = this.state;
     const options1 = {
       dots: true,
       infinite: false,
       speed: 400,
       marginLeft: 5,
       marginRight: 5,
-      slidesToShow: 6,
+      slidesToShow: 4,
       slidesToScroll: 1
     };
 
@@ -54,11 +51,11 @@ class ListBanChay extends Component {
       <div className="gx-main-content">
         <Row>
           <Col span={24}>
-            <CardBox  heading="Sách bán chạy">
+            <CardBox  heading="Tác giả">
               <Slider {...options1}>
-                {bestSellerList.map(book => (
-                  <div key={book.id}>
-                    <BookItem book={book} grid />
+                {list_tac_gia.map(tac_gia => (
+                  <div key={tac_gia.id}>
+                    <TacGiaItem tac_gia={tac_gia}  />
                   </div>
                 ))}
               </Slider>
@@ -70,4 +67,4 @@ class ListBanChay extends Component {
   }
 }
 
-export default ListBanChay;
+export default ListTacGia;

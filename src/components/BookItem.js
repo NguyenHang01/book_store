@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BooktItem = ({book, grid}) => {
   const {anh, ten, gia_bia, chiet_khau} = book;
   return (
+    <Link to={`/book/${book.id}`}>
     <div style={{marginLeft:10}} className={`gx-product-item  ${grid ? 'gx-product-vertical' : 'gx-product-horizontal'}`}>
       <div style={{width:160, height:210}} className="gx-product-image">
       <img style={{height:200, width:150, marginRight:5, marginLeft:10, marginBottom:3}} alt="book" src={anh}/>
@@ -22,6 +24,7 @@ const BooktItem = ({book, grid}) => {
         </div>
       </div>
     </div>
+    </Link>
   )
 };
 
