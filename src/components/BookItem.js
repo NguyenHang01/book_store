@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BooktItem = ({book, grid}) => {
-  const {anh, ten, gia_bia, chiet_khau} = book;
+  const {anh, ten, gia_bia, chiet_khau, chi_tiet} = book;
   return (
     <Link to={`/book/${book.id}`}>
     <div style={{marginLeft:10}} className={`gx-product-item  ${grid ? 'gx-product-vertical' : 'gx-product-horizontal'}`}>
@@ -22,6 +22,8 @@ const BooktItem = ({book, grid}) => {
           </h5>
           <h5 className="gx-text-success">{chiet_khau}% off</h5>
         </div>
+        {grid?"":<p>{chi_tiet.slice(0,150)}...</p>}
+
       </div>
     </div>
     </Link>

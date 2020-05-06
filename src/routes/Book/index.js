@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import { Col, Row, Card, Button, Input, notification } from "antd";
 import firebase from "firebase";
+
+const db = firebase.firestore();
 class BookDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       book: {},
-      quantity: 1
+      quantity: 1,
     };
   }
 
   componentDidMount() {
-    const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-
+    // get sach voi id=this.props.match.params.id
+    const id_sach = this.props.match.params.id;
     db.collection("sach")
-      .doc(this.props.match.params.id)
+      .doc(id_sach)
       .get()
       .then(snapshot => {
         let data = snapshot.data();
@@ -53,7 +52,24 @@ class BookDetail extends Component {
   };
 
   addCart = () => {
-    this.openNotificationWithIcon("success", "Thêm vào giỏ hàng thành công");
+    const id_sach = this.props.match.params.id;
+    const uid = firebase.auth().currentUser.uid;
+    const {quantity} = this.state;
+    db.collection("gio_hang")
+      .doc(uid)
+      .collection("sach")
+      .doc(id_sach)
+      .set({ so_luong: quantity })
+      .then(() => {
+        this.openNotificationWithIcon(
+          "success",
+          "Thêm vào giỏ hàng thành công"
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
   };
 
   render() {
@@ -108,7 +124,12 @@ class BookDetail extends Component {
                     </Button>
                   </Input.Group>
                 </div>
-                <Button type="primary" size={14} onClick={this.addCart}>
+                <Button
+                  style={{ marginTop: 25 }}
+                  type="primary"
+                  size={14}
+                  onClick={this.addCart}
+                >
                   <i className="icon icon-shopping-cart" />
                   Thêm vào giỏ hàng
                 </Button>

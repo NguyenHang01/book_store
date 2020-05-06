@@ -1,6 +1,6 @@
 import React from "react";
 import ListBanChay from "../../components/HomePage/ListBanChay";
-import ListBook from "../../components/HomePage/ListBook"
+import BookGrid from "../../components/HomePage/BookGrid"
 import ListTacGia from "../../components/HomePage/ListTacGia";
 import ListNXB from "../../components/HomePage/ListNXB";
 import ListTheLoai from "../../components/HomePage/ListTheLoai";
@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <div>
       <ListBanChay />
-      <ListBook />
+      <BookGrid />
       <ListTacGia/>
       <ListNXB/>
       <ListTheLoai/>

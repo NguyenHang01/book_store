@@ -67,14 +67,6 @@ class HorizontalDark extends Component {
         <div className="gx-header-horizontal-top">
           <div className="gx-container">
             <div className="gx-header-horizontal-top-flex">
-              {/* <div className="gx-header-horizontal-top-left">
-                <i className="icon icon-alert gx-mr-3"/>
-                <p className="gx-mb-0 gx-text-truncate"><IntlMessages id="app.announced"/></p>
-              </div> */}
-              {/* <ul className="gx-login-list">
-                <li>Login</li>
-                <li>Signup</li>
-              </ul> */}
             </div>
           </div>
         </div>
@@ -127,31 +119,12 @@ class HorizontalDark extends Component {
 
                   </Popover>
                 </li>
-
-                <li className="gx-notify">
-                  <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight" content={<AppNotification/>}
-                           trigger="click">
-                    <span className="gx-pointer gx-d-block"><i className="icon icon-notification"/></span>
-                  </Popover>
-                </li>
-
                 <li className="gx-msg">
-                  <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight"
-                           content={<MailNotification/>} trigger="click">
                 <span className="gx-pointer gx-status-pos gx-d-block">
-                <i className="icon icon-chat-new"/>
+                <i className="icon icon-shopping-cart"/>
                 <span className="gx-status gx-status-rtl gx-small gx-orange"/>
                 </span>
-                  </Popover>
                 </li>
-                {/* <li className="gx-language">
-                  <Popover overlayClassName="gx-popover-horizantal" placement="bottomRight"
-                           content={this.languageMenu()} trigger="click">
-              <span className="gx-pointer gx-flex-row gx-align-items-center"><i
-                className={`flag flag-24 flag-${locale.icon}`}/>
-              </span>
-                  </Popover>
-                </li> */}
                 <li className="gx-user-nav"><UserInfo/></li>
               </ul>
             </div>
@@ -161,11 +134,6 @@ class HorizontalDark extends Component {
           <div className="gx-container">
             <div className="gx-header-horizontal-nav-flex">
               <HorizontalNav/>
-              {/* <ul className="gx-header-notifications gx-ml-auto">
-                <li><span className="gx-pointer gx-d-block"><i className="icon icon-menu-lines"/></span></li>
-                <li><span className="gx-pointer gx-d-block"><i className="icon icon-setting"/></span></li>
-                <li><span className="gx-pointer gx-d-block"><i className="icon icon-apps-new"/></span></li>
-              </ul> */}
             </div>
           </div>
         </div>

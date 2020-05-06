@@ -6,7 +6,7 @@ import firebase from "firebase";
 import BookItem from "../BookItem";
 import CardBox from "../CardBox";
 
-class ListBook extends Component {
+class BookGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,4 +65,4 @@ class ListBook extends Component {
   }
 }
 
-export default ListBook;
+export default BookGrid;

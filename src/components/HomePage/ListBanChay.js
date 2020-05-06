@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import CardBox from "../CardBox/index";
 import firebase from "firebase";
 import BookItem from "../BookItem";
+import { Link } from "react-router-dom";
 
 class ListBanChay extends Component {
   constructor(props) {
@@ -54,7 +55,10 @@ class ListBanChay extends Component {
       <div className="gx-main-content">
         <Row>
           <Col span={24}>
-            <CardBox  heading="Sách bán chạy">
+            <CardBox  >
+              <Link to={`/ban_chay`}>
+              <h2>Sách bán chạy</h2>
+              </Link>
               <Slider {...options1}>
                 {bestSellerList.map(book => (
                   <div key={book.id}>
