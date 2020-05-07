@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Card, Button, Input, notification } from "antd";
+import { Col, Row, Card, Button, Input, notification, Popconfirm } from "antd";
 
 class BooktItemForCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: this.props.book.sl_order,
+      quantity: this.props.book.sl_order
     };
   }
 
@@ -16,8 +16,8 @@ class BooktItemForCart extends Component {
     });
   };
 
-  changeQuantity = (e) => {
-    const {book} = this.props;
+  changeQuantity = e => {
+    const { book } = this.props;
     let { quantity } = this.state;
     switch (e.target.id) {
       case "tang":
@@ -34,6 +34,10 @@ class BooktItemForCart extends Component {
     }
     return quantity;
   };
+
+  confirm=(e)=>{
+
+  }
 
   render() {
     const { anh, ten, gia_bia, chiet_khau, id } = this.props.book;
@@ -71,26 +75,38 @@ class BooktItemForCart extends Component {
           </div>
         </Link>
         <div>
-          <Input.Group compact>
-            <Button
-              id="tang"
-              style={{ width: "18%" }}
-              onClick={this.changeQuantity}
+          <div style={{ float: "inline-start" }}>
+            <Input.Group compact>
+              <Button
+                id="tang"
+                style={{ width: "18%" }}
+                onClick={this.changeQuantity}
+              >
+                +
+              </Button>
+              <Input style={{ width: "14%" }} value={quantity} />
+              <Button
+                id="giam"
+                style={{ width: "18%" }}
+                onClick={this.changeQuantity}
+              >
+                -
+              </Button>
+            </Input.Group>
+          </div>
+          <div style={{ float: "inline-start" }}>
+            <Popconfirm
+              title="Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng?"
+              onConfirm={this.confirm}
+              // onCancel={this.cancel}
+              okText="Yes"
+              cancelText="No"
             >
-              +
-            </Button>
-            <Input
-              style={{ width: "14%" }}
-              value={quantity}
-            />
-            <Button
-              id="giam"
-              style={{ width: "18%" }}
-              onClick={this.changeQuantity}
-            >
-              -
-            </Button>
-          </Input.Group>
+              <Button type="primary" danger >
+                Xóa
+              </Button>
+            </Popconfirm>
+          </div>
         </div>
       </div>
     );
