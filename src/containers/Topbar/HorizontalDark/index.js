@@ -121,8 +121,10 @@ class HorizontalDark extends Component {
                 </li>
                 <li className="gx-msg">
                 <span className="gx-pointer gx-status-pos gx-d-block">
+                <Link to={`/card`}>
                 <i className="icon icon-shopping-cart"/>
-                <span className="gx-status gx-status-rtl gx-small gx-orange"/>
+                </Link>
+                {/* <span className="gx-status gx-status-rtl gx-small gx-orange"/> */}
                 </span>
                 </li>
                 <li className="gx-user-nav"><UserInfo/></li>

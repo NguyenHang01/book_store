@@ -28,6 +28,7 @@ class ListBanChay extends Component {
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
+          console.log(doc.data());
           let data = doc.data();
           data.id = doc.id;
           bestSellerList.push(data);
@@ -39,7 +40,6 @@ class ListBanChay extends Component {
       });
   }
   render() {
-    console.log(this.state.bestSellerList);
     const { bestSellerList } = this.state;
     const options1 = {
       dots: true,

@@ -4,6 +4,7 @@ import DetailSachBanChay from "./ListBook/DetailSachBanChay"
 import asyncComponent from "util/asyncComponent";
 import BookGridGetBy from "./ListBook/BookGridGetBy";
 
+
 const App = ({ match }) => (
   <div className="gx-main-content-wrapper">
     <Switch>
@@ -21,13 +22,18 @@ const App = ({ match }) => (
         component={DetailSachBanChay}
       />
       <Route
-        path={`${match.url}book/:id`}
-        component={asyncComponent(() => import("./Book"))}
+        path={`${match.url}:by/:id`}
+        component={BookGridGetBy}
       />
       <Route
         path={`${match.url}:by/:id`}
         component={BookGridGetBy}
       />
+      <Route
+        path={`${match.url}card`}
+        component={asyncComponent(() => import("./ListCart"))}
+      />
+
 
     </Switch>
   </div>
