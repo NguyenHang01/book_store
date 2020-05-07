@@ -33,6 +33,10 @@ const App = ({ match }) => (
         path={`${match.url}card`}
         component={asyncComponent(() => import("./ListCart"))}
       />
+      <Route
+        path={`${match.url}order`}
+        component={asyncComponent(() => import("./Order"))}
+      />
 
 
     </Switch>

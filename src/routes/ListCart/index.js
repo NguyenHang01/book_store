@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Col, Row, Card, Button, Input, notification } from "antd";
 import firebase from "firebase";
-import { object } from "prop-types";
 import BooktItemForCart from "../../components/BookItemForCart";
+import { Link } from "react-router-dom";
 
 const db = firebase.firestore();
 class ListCart extends Component {
@@ -35,10 +35,6 @@ class ListCart extends Component {
   async componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
     const listIdBook = await this.getListIdBook(uid);
-    // let listBook = [];
-    // for (let i = 0; i < listIdBook.length; i++) {
-    //   listBook.push(await this.getBookById(listIdBook[i]));
-    // }
     this.setState({ listBook: listIdBook });
   }
 
@@ -69,10 +65,12 @@ class ListCart extends Component {
             </div>
             <div style={{ float: "left", width: "30%" }}>
               <Card>
+                <Link to={`/order`}>
                 <div>
                   <img src="https://i.pinimg.com/564x/dd/a5/0b/dda50bb0b5a78b869f2f6a4a5c2fd5c8.jpg"/>
                   <Button type="primary" block>Đặt hàng ngay </Button>
                 </div>
+                </Link>
               </Card>
             </div>
           </div>
