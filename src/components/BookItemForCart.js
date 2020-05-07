@@ -1,15 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Card, Button, Input, notification, Popconfirm } from "antd";
+import firebase from "firebase";
 
+const db = firebase.firestore();
 class BooktItemForCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: this.props.book.sl_order
+      id_book: this.props.id_book,
+      book:{},
     };
   }
 
+  getBookById = async id_book => {
+    let data = {};
+    await db
+      // .collection("sach")
+      .doc(`sach/${id_book.id}`)
+      .get()
+      .then(snapshot => {
+        data = snapshot.data();
+        data.id = snapshot.id;
+      })
+      .catch(err => {
+        console.log("Error getting documents", err);
+      });
+    data.quantity = id_book.so_luong; //so luong sach co id=book.id trong gio hang
+    return data;
+  };
+
+  async componentDidMount(){
+    const {id_book} = this.state;
+    const book= await this.getBookById(id_book);
+    this.setState({book:book});
+  }
   openNotificationWithIcon = (type, message) => {
     notification[type]({
       message: message
@@ -17,8 +42,8 @@ class BooktItemForCart extends Component {
   };
 
   changeQuantity = e => {
-    const { book } = this.props;
-    let { quantity } = this.state;
+    const { book } = this.state;
+    let quantity=book.quantity;
     switch (e.target.id) {
       case "tang":
         if (quantity === book.so_luong)
@@ -26,22 +51,26 @@ class BooktItemForCart extends Component {
             "warning",
             "Không thể mua quá số lượng trong kho"
           );
-        else this.setState({ quantity: quantity + 1 });
+        else  quantity= quantity + 1 ;
         break;
       case "giam":
-        if (quantity > 1) this.setState({ quantity: quantity - 1 });
+        if (quantity > 1)  quantity= quantity - 1;
         break;
     }
-    return quantity;
+    book.quantity=quantity;
+    this.setState({book: book});
   };
+
+  UpdateCart=()=>{
+
+  }
 
   confirm=(e)=>{
 
   }
 
   render() {
-    const { anh, ten, gia_bia, chiet_khau, id } = this.props.book;
-    let { quantity } = this.state;
+    const { anh, ten, gia_bia, chiet_khau, id, quantity } = this.state.book;
     return (
       <div
         style={{ marginLeft: 10 }}
@@ -98,7 +127,6 @@ class BooktItemForCart extends Component {
             <Popconfirm
               title="Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng?"
               onConfirm={this.confirm}
-              // onCancel={this.cancel}
               okText="Yes"
               cancelText="No"
             >

@@ -32,41 +32,37 @@ class ListCart extends Component {
     return listIdBook;
   };
 
-  getBookById = async book => {
-    let data = {};
-    await db
-      .collection("sach")
-      .doc(book.id)
-      .get()
-      .then(snapshot => {
-        data = snapshot.data();
-        data.id = snapshot.id;
-      })
-      .catch(err => {
-        console.log("Error getting documents", err);
-      });
-    data.sl_order = book.so_luong; //so luong sach co id=book.id trong gio hang
-    return data;
-  };
+  // getBookById = async book => {
+  //   let data = {};
+  //   await db
+  //     .collection("sach")
+  //     .doc(book.id)
+  //     .get()
+  //     .then(snapshot => {
+  //       data = snapshot.data();
+  //       data.id = snapshot.id;
+  //     })
+  //     .catch(err => {
+  //       console.log("Error getting documents", err);
+  //     });
+  //   data.quantity = book.so_luong; //so luong sach co id=book.id trong gio hang
+  //   return data;
+  // };
 
   async componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
     const listIdBook = await this.getListIdBook(uid);
-    let listBook = [];
-    for (let i = 0; i < listIdBook.length; i++) {
-      listBook.push(await this.getBookById(listIdBook[i]));
-    }
-    this.setState({ listBook: listBook });
+    // let listBook = [];
+    // for (let i = 0; i < listIdBook.length; i++) {
+    //   listBook.push(await this.getBookById(listIdBook[i]));
+    // }
+    this.setState({ listBook: listIdBook });
   }
 
   openNotificationWithIcon = (type, message) => {
     notification[type]({
       message: message
     });
-  };
-
-  onChange = data => {
-    console.log(data);
   };
 
   render() {
@@ -82,10 +78,7 @@ class ListCart extends Component {
                   <Col key={index} span={24}>
                     <BooktItemForCart
                       key={index}
-                      book={book}
-                      onChange={e => {
-                        onchange(e);
-                      }}
+                      id_book={book}
                     />
                   </Col>
                 </Row>
@@ -98,10 +91,6 @@ class ListCart extends Component {
             </div>
           </div>
         </div>
-        {/* <Row>
-          <Col span={2}/>
-<p>Hello</p>
-        </Row> */}
       </div>
     );
   }
