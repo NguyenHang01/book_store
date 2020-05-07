@@ -32,23 +32,6 @@ class ListCart extends Component {
     return listIdBook;
   };
 
-  // getBookById = async book => {
-  //   let data = {};
-  //   await db
-  //     .collection("sach")
-  //     .doc(book.id)
-  //     .get()
-  //     .then(snapshot => {
-  //       data = snapshot.data();
-  //       data.id = snapshot.id;
-  //     })
-  //     .catch(err => {
-  //       console.log("Error getting documents", err);
-  //     });
-  //   data.quantity = book.so_luong; //so luong sach co id=book.id trong gio hang
-  //   return data;
-  // };
-
   async componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
     const listIdBook = await this.getListIdBook(uid);
@@ -86,7 +69,10 @@ class ListCart extends Component {
             </div>
             <div style={{ float: "left", width: "30%" }}>
               <Card>
-                <h3>Tổng tiền tạm tính: </h3>
+                <div>
+                  <img src="https://i.pinimg.com/564x/dd/a5/0b/dda50bb0b5a78b869f2f6a4a5c2fd5c8.jpg"/>
+                  <Button type="primary" block>Đặt hàng ngay </Button>
+                </div>
               </Card>
             </div>
           </div>
