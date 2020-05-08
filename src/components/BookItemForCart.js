@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Card, Button, Input, notification, Popconfirm } from "antd";
+import { Button, Input, notification, Popconfirm } from "antd";
 import firebase from "firebase";
 
 const db = firebase.firestore();
@@ -18,7 +18,7 @@ class BooktItemForCart extends Component {
   getBookById = async id_book => {
     let data = {};
     await db
-      .doc(`sach/${id_book.id}`)
+      .doc(`sach/${id_book}`)
       .get()
       .then(snapshot => {
         data = snapshot.data();
@@ -27,15 +27,15 @@ class BooktItemForCart extends Component {
       .catch(err => {
         console.log("Error getting documents", err);
       });
-    // data.quantity = id_book.so_luong; //so luong sach co id=book.id trong gio hang
     return data;
   };
 
   async componentDidMount() {
     const { id_book } = this.state;
-    const book = await this.getBookById(id_book);
+    const book = await this.getBookById(id_book.id);
     this.setState({ book: book });
   }
+
   openNotificationWithIcon = (type, message) => {
     notification[type]({
       message: message
@@ -98,6 +98,7 @@ class BooktItemForCart extends Component {
   render() {
     const { anh, ten, gia_bia, chiet_khau, id } = this.state.book;
     const { quantity, isDelete } = this.state;
+    const gia_ban= Math.floor(gia_bia * (1 - chiet_khau / 100));
     return (
       <div>
         {isDelete ? null : (
@@ -127,9 +128,9 @@ class BooktItemForCart extends Component {
                   <h4>{ten}</h4>
                 </div>
                 <div className="ant-row-flex">
-                  <h4>{Math.floor(gia_bia * (1 - chiet_khau / 100))}đ </h4>
+                  <h4>{Number(gia_ban).toLocaleString()}đ </h4>
                   <h5 className="gx-text-muted gx-px-2">
-                    <del>{gia_bia}đ</del>
+                    <del>{Number(gia_bia).toLocaleString()}đ</del>
                   </h5>
                   <h5 className="gx-text-success">{chiet_khau}% off</h5>
                 </div>

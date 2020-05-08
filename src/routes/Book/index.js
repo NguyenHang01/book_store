@@ -75,6 +75,7 @@ class BookDetail extends Component {
   render() {
     const { book, quantity } = this.state;
     const { chi_tiet } = book;
+    const gia_ban= Math.floor(book.gia_bia * (1 - book.chiet_khau / 100));
     return (
       <div>
         <Card>
@@ -90,10 +91,10 @@ class BookDetail extends Component {
                 <p>Thể loại: {book.the_loai}</p>
                 <div className="ant-row-flex">
                   <h2 style={{ color: "#ff9900" }}>
-                    {Math.floor(book.gia_bia * (1 - book.chiet_khau / 100))}đ{" "}
+                    {Number(gia_ban).toLocaleString()}đ{" "}
                   </h2>
                   <h5 className="gx-text-muted gx-px-2">
-                    <del>{book.gia_bia}đ</del>
+                    <del>{Number(book.gia_bia).toLocaleString()}đ</del>
                   </h5>
                   <h5 className="gx-text-success">-{book.chiet_khau}%</h5>
                 </div>

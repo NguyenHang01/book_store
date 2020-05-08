@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const BooktItem = ({book, grid}) => {
   const {anh, ten, gia_bia, chiet_khau, chi_tiet} = book;
+  const gia_ban= Math.floor(gia_bia*( 1-chiet_khau/100)) ;
   return (
     <Link to={`/book/${book.id}`}>
     <div style={{marginLeft:10}} className={`gx-product-item  ${grid ? 'gx-product-vertical' : 'gx-product-horizontal'}`}>
@@ -16,9 +17,9 @@ const BooktItem = ({book, grid}) => {
         </h5>
         </div>
         <div className="ant-row-flex">
-          <h4>{Math.floor(gia_bia*( 1-chiet_khau/100)) }đ </h4>
+          <h4>{Number(gia_ban).toLocaleString() }đ </h4>
           <h5 className="gx-text-muted gx-px-2">
-            <del>{gia_bia}đ</del>
+            <del>{Number(gia_bia).toLocaleString()}đ</del>
           </h5>
           <h5 className="gx-text-success">{chiet_khau}% off</h5>
         </div>

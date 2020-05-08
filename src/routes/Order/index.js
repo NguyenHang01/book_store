@@ -15,7 +15,7 @@ class Order extends Component {
   render(){
     return(
       <div>
-        Order now
+
       </div>
     );
   }

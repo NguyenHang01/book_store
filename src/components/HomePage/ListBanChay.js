@@ -28,7 +28,6 @@ class ListBanChay extends Component {
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          console.log(doc.data());
           let data = doc.data();
           data.id = doc.id;
           bestSellerList.push(data);
