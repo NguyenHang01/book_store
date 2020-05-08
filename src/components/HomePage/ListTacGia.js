@@ -18,9 +18,6 @@ class ListTacGia extends Component {
   componentDidMount() {
     let list_tac_gia = [];
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     db.collection("tac-gia")
       .get()
       .then(snapshot => {

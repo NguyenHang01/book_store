@@ -15,7 +15,8 @@ class ListCart extends Component {
     };
   }
 
-  getListIdBook = async uid => {
+  getListIdBook = async () => {
+    const uid = firebase.auth().currentUser.uid;
     let listIdBook = [];
     await db
       .collection("gio_hang")
@@ -36,8 +37,7 @@ class ListCart extends Component {
   };
 
   async componentDidMount() {
-    const uid = firebase.auth().currentUser.uid;
-    const listIdBook = await this.getListIdBook(uid);
+    const listIdBook = await this.getListIdBook();
     this.setState({ listBook: listIdBook });
   }
 
@@ -47,29 +47,14 @@ class ListCart extends Component {
     });
   };
 
-  getCostBookById = async id_book => {
-    let data = {};
-    await db
-      .doc(`sach/${id_book}`)
-      .get()
-      .then(snapshot => {
-        data = snapshot.data();
-        data.id = snapshot.id;
-      })
-      .catch(err => {
-        console.log("Error getting documents", err);
-      });
-    return Math.floor(data.gia_bia * (1 - data.chiet_khau/100)) ;
-  };
 
   handleTotal =async () => {
-    const { listBook, isClickCost } = this.state;
-    var totalCost=0;
-    await Promise.all( listBook.map(async (book) => {
-      let cost = await this.getCostBookById(book.id);
-      totalCost = totalCost + cost * book.so_luong;
-    }))
-    console.log(totalCost);
+    const { isClickCost } = this.state;
+    const listBook = await this.getListIdBook();
+    let totalCost=0;
+    listBook.map((book)=>{
+      totalCost += book.gia_ban * book.so_luong;
+    })
      this.setState({totalCost:totalCost, isClickCost:1})
   };
 

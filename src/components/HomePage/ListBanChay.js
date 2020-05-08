@@ -19,9 +19,6 @@ class ListBanChay extends Component {
   componentDidMount() {
     let bestSellerList = [];
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     db.collection("sach")
       .orderBy("da_ban", "desc")
       .limit(15)

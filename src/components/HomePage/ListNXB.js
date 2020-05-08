@@ -18,9 +18,6 @@ class ListNXB extends Component {
   componentDidMount() {
     let list_nxb = [];
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     db.collection("nxb")
       .get()
       .then(snapshot => {

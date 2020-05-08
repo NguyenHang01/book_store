@@ -54,12 +54,13 @@ class BookDetail extends Component {
   addCart = () => {
     const id_sach = this.props.match.params.id;
     const uid = firebase.auth().currentUser.uid;
-    const {quantity} = this.state;
+    const {quantity, book} = this.state;
+    const gia_ban= Math.floor(book.gia_bia * (1 - book.chiet_khau / 100));
     db.collection("gio_hang")
       .doc(uid)
       .collection("sach")
       .doc(id_sach)
-      .set({ so_luong: quantity })
+      .set({ so_luong: quantity, gia_ban: gia_ban})
       .then(() => {
         this.openNotificationWithIcon(
           "success",

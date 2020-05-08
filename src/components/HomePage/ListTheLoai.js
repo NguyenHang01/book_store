@@ -18,9 +18,6 @@ class ListTheLoai extends Component {
   componentDidMount() {
     let list_the_loai = [];
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
     db.collection("the-loai")
       .get()
       .then(snapshot => {
