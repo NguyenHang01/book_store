@@ -37,6 +37,10 @@ const App = ({ match }) => (
         path={`${match.url}order`}
         component={asyncComponent(() => import("./Order"))}
       />
+      <Route
+        path={`${match.url}history`}
+        component={asyncComponent(() => import("./History"))}
+      />
 
 
     </Switch>

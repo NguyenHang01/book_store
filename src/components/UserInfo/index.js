@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Avatar, Popover } from "antd";
 import { userSignOut } from "appRedux/actions/Auth";
 import { auth } from "../../firebase/firebase";
+import { Link } from "react-router-dom";
 
 class UserInfo extends Component {
   render() {
@@ -11,7 +12,9 @@ class UserInfo extends Component {
     const userMenuOptions = (
       <ul className="gx-user-popover">
         <li>My Account</li>
+        <Link to={`/history`}>
         <li>Lịch sử đặt hàng</li>
+        </Link>
         <li onClick={() => this.props.userSignOut()}>Logout</li>
       </ul>
     );
