@@ -9,7 +9,7 @@ class Order extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      success: 0,
+      success: 0
     };
   }
 
@@ -76,6 +76,8 @@ class Order extends Component {
 
   deleteCart = (listBook, uid) => {
     listBook.forEach(book => {
+
+      //Xoa document book.id trong gio hang
       db.doc(`gio_hang/${uid}/sach/${book.id}`)
         .delete()
         .then(function() {
@@ -84,6 +86,15 @@ class Order extends Component {
         .catch(function(error) {
           console.error("Error removing document: ", error);
         });
+
+      //Update so_luong sach  trong document "sach/book.id"
+      const bookRef = db.doc(`sach/${book.id}`);
+      db.runTransaction(transaction => {
+        return transaction.get(bookRef).then(doc => {
+          let new_so_luong = doc.data().so_luong - book.so_luong;
+          transaction.update(bookRef, { so_luong: new_so_luong });
+        });
+      });
     });
   };
 
@@ -107,9 +118,13 @@ class Order extends Component {
         listIdBook.map(book => {
           totalCost += book.gia_ban * book.so_luong;
         });
+        //Add bill moi vao collection "don_hang"
         this.order(listIdBook, uid, inf, totalCost);
+
+        //Xoa het sach trong gio hang va update so sach con lai trong collection "sach"
         this.deleteCart(listIdBook, uid);
-        this.setState({success:1})
+
+        this.setState({ success: 1 });
       }
     });
   };
@@ -119,7 +134,8 @@ class Order extends Component {
     let { success } = this.state;
     return (
       <div>
-        {success?<Redirect to="/home"/> : null }
+        {/* Neu order thanh cong thi redirect ve trang hom */}
+        {success ? <Redirect to="/home" /> : null}
         <div className="title-header">
           <h3 className="text-title">Nhập thông tin của bạn</h3>
         </div>

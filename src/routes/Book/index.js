@@ -38,7 +38,7 @@ class BookDetail extends Component {
     let { book, quantity } = this.state;
     switch (e.target.id) {
       case "tang":
-        if (quantity === book.so_luong)
+        if (quantity >= book.so_luong)
           this.openNotificationWithIcon(
             "warning",
             "Không thể mua quá số lượng trong kho"
@@ -60,7 +60,7 @@ class BookDetail extends Component {
       .doc(uid)
       .collection("sach")
       .doc(id_sach)
-      .set({ so_luong: quantity, gia_ban: gia_ban})
+      .set({ so_luong: quantity, gia_ban: gia_ban, ten:book.ten})
       .then(() => {
         this.openNotificationWithIcon(
           "success",
