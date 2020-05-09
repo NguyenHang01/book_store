@@ -41,7 +41,7 @@ class HorizontalNav extends Component {
                  title='Home'>
           <Menu.Item key="home">
             <Link to="/home"><i className="icon icon-widgets"/>
-              hello</Link>
+              Home</Link>
           </Menu.Item>
         </SubMenu>
       </Menu>
