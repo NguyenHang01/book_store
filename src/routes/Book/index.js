@@ -53,7 +53,7 @@ class BookDetail extends Component {
 
   addCart = () => {
     const id_sach = this.props.match.params.id;
-    const uid = firebase.auth().currentUser.uid;
+    const uid = localStorage.getItem("user_id");
     const {quantity, book} = this.state;
     const gia_ban= Math.floor(book.gia_bia * (1 - book.chiet_khau / 100));
     db.collection("gio_hang")
@@ -106,11 +106,11 @@ class BookDetail extends Component {
                 <div>
                   <Input.Group compact>
                     <Button
-                      id="tang"
+                      id="giam"
                       style={{ width: "19%" }}
                       onClick={this.changeQuantity}
                     >
-                      +
+                      -
                     </Button>
                     <Input
                       style={{ width: "12%" }}
@@ -118,11 +118,11 @@ class BookDetail extends Component {
                       onChange={this.changeQuantity}
                     />
                     <Button
-                      id="giam"
+                      id="tang"
                       style={{ width: "19%" }}
                       onClick={this.changeQuantity}
                     >
-                      -
+                      +
                     </Button>
                   </Input.Group>
                 </div>

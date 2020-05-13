@@ -102,7 +102,7 @@ class Order extends Component {
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        const uid = firebase.auth().currentUser.uid;
+        const uid = localStorage.getItem("user_id");
         const listIdBook = await this.getListIdBook(uid);
         const inf = {
           dia_chi:

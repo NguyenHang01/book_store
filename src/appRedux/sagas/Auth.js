@@ -67,6 +67,7 @@ function* createUserWithEmailPassword({payload}) {
       yield put(showAuthMessage(signUpUser.message));
     } else {
       localStorage.setItem('user_id', signUpUser.user.uid);
+      localStorage.setItem('PhotoURL', signUpUser.user.photoURL);
       yield put(userSignUpSuccess(signUpUser.user.uid));
     }
   } catch (error) {
@@ -81,6 +82,7 @@ function* signInUserWithGoogle() {
       yield put(showAuthMessage(signUpUser.message));
     } else {
       localStorage.setItem('user_id', signUpUser.user.uid);
+      localStorage.setItem('PhotoURL', signUpUser.user.photoURL);
       yield put(userGoogleSignInSuccess(signUpUser.user.uid));
     }
   } catch (error) {
@@ -96,6 +98,7 @@ function* signInUserWithFacebook() {
       yield put(showAuthMessage(signUpUser.message));
     } else {
       localStorage.setItem('user_id', signUpUser.user.uid);
+      localStorage.setItem('PhotoURL', signUpUser.user.photoURL);
       yield put(userFacebookSignInSuccess(signUpUser.user.uid));
     }
   } catch (error) {
@@ -111,6 +114,7 @@ function* signInUserWithGithub() {
       yield put(showAuthMessage(signUpUser.message));
     } else {
       localStorage.setItem('user_id', signUpUser.user.uid);
+      localStorage.setItem('PhotoURL', signUpUser.user.photoURL);
       yield put(userGithubSignInSuccess(signUpUser.user.uid));
     }
   } catch (error) {
@@ -130,6 +134,7 @@ function* signInUserWithTwitter() {
       }
     } else {
       localStorage.setItem('user_id', signUpUser.user.uid);
+      localStorage.setItem('PhotoURL', signUpUser.user.photoURL);
       yield put(userTwitterSignInSuccess(signUpUser.user.uid));
     }
   } catch (error) {
@@ -145,6 +150,7 @@ function* signInUserWithEmailPassword({payload}) {
       yield put(showAuthMessage(signInUser.message));
     } else {
       localStorage.setItem('user_id', signInUser.user.uid);
+      localStorage.setItem('PhotoURL', signInUser.user.photoURL);
       yield put(userSignInSuccess(signInUser.user.uid));
     }
   } catch (error) {
@@ -157,6 +163,7 @@ function* signOut() {
     const signOutUser = yield call(signOutRequest);
     if (signOutUser === undefined) {
       localStorage.removeItem('user_id');
+      localStorage.removeItem('PhotoURL');
       yield put(userSignOutSuccess(signOutUser));
     } else {
       yield put(showAuthMessage(signOutUser.message));

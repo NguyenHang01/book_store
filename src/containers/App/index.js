@@ -90,13 +90,12 @@ class App extends Component {
   }
 
   render() {
-    const uid=(firebase.auth().currentUser)?(firebase.auth().currentUser.uid):null;
     const {match, location, themeType, layoutType, navStyle, locale, authUser, initURL} = this.props;
     if (themeType === THEME_TYPE_DARK) {
       document.body.classList.add('dark-theme');
     }
     if (location.pathname === '/') {
-      if (authUser === null  || uid ===null) {
+      if (authUser === null) {
         return ( <Redirect to={'/signin'}/> );
       } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
         return ( <Redirect to={'/home'}/> );

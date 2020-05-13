@@ -34,8 +34,8 @@ class SignUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: 'demo@example.com',
-      password: 'demo#123'
+      email: '',
+      password: ''
     }
   }
 

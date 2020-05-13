@@ -16,7 +16,7 @@ class ListCart extends Component {
   }
 
   getListIdBook = async () => {
-    const uid = firebase.auth().currentUser.uid;
+    const uid = localStorage.getItem("user_id");
     let listIdBook = [];
     await db
       .collection("gio_hang")
@@ -47,15 +47,42 @@ class ListCart extends Component {
     });
   };
 
-
-  handleTotal =async () => {
+  handleTotal = async () => {
     const { isClickCost } = this.state;
     const listBook = await this.getListIdBook();
-    let totalCost=0;
-    listBook.map((book)=>{
+    let totalCost = 0;
+    listBook.map(book => {
       totalCost += book.gia_ban * book.so_luong;
-    })
-     this.setState({totalCost:totalCost, isClickCost:1})
+    });
+    this.setState({ totalCost: totalCost, isClickCost: 1 });
+  };
+
+  renderListBook = listBook => {
+    return (
+      <div style={{ float: "left", width: "70%" }}>
+        {listBook.map((book, index) => (
+          <Row style={{ width: 720 }}>
+            <Col key={index} span={24}>
+              <BooktItemForCart key={index} id_book={book} />
+            </Col>
+          </Row>
+        ))}
+      </div>
+    );
+  };
+
+  renderEmpty = () => {
+    return (
+      <div style={{ float: "left", width: "70%" }}>
+        <Card>
+        <Row style={{ width: 720 }}>
+          <Col span={24}>
+            <div>Không có sản phẩm nào trong giỏ hàng</div>
+          </Col>
+        </Row>
+        </Card>
+      </div>
+    );
   };
 
   render() {
@@ -64,7 +91,7 @@ class ListCart extends Component {
       <div>
         <div className="gx-main-content">
           <div>
-            <div style={{ float: "left", width: "70%" }}>
+            {/* <div style={{ float: "left", width: "70%" }}>
               {listBook.map((book, index) => (
                 <Row style={{ width: 720 }}>
                   <Col key={index} span={24}>
@@ -72,13 +99,21 @@ class ListCart extends Component {
                   </Col>
                 </Row>
               ))}
-            </div>
+            </div> */}
+            {listBook.length === 0
+              ? this.renderEmpty()
+              : this.renderListBook(listBook)}
             <div style={{ float: "left", width: "30%" }}>
               <Card>
                 <Button type="primary" block onClick={this.handleTotal}>
                   Xem tổng tiền{" "}
                 </Button>
-                {!isClickCost ? null : <h3>Tổng tiền tạm tính: {Number((totalCost).toFixed(1)).toLocaleString()}đ</h3>}
+                {!isClickCost ? null : (
+                  <h3>
+                    Tổng tiền tạm tính:{" "}
+                    {Number(totalCost.toFixed(1)).toLocaleString()}đ
+                  </h3>
+                )}
                 <Link to={`/order`}>
                   <div>
                     <Button type="primary" block>

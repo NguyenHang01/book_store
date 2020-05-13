@@ -17,7 +17,9 @@ class History extends Component {
 
   async componentDidMount() {
     let listBill = [];
-    const uid = firebase.auth().currentUser.uid;
+    const uid = localStorage.getItem("user_id");
+    console.log(uid);
+
     await db.collection("don_hang")
       .where("uid", "==", uid)
       .get()
@@ -34,8 +36,6 @@ class History extends Component {
 
   render() {
     const {listBill}=this.state;
-    console.log(listBill);
-
     return (
       <div>
         <div>

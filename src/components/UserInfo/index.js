@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Avatar, Popover } from "antd";
 import { userSignOut } from "appRedux/actions/Auth";
-import { auth } from "../../firebase/firebase";
+import firebase from "firebase";
 import { Link } from "react-router-dom";
+
 
 class UserInfo extends Component {
   render() {
-    const user = auth.currentUser;
-    const photoURL = (user!==null)?user.photoURL:'https://image.aladin.co.kr/Community/myface/pt_7489181011320609.jpeg';
+    const photoURL = localStorage.getItem("PhotoURL");
     const userMenuOptions = (
       <ul className="gx-user-popover">
         <li>My Account</li>

@@ -12,7 +12,6 @@ class HistoryItem extends Component {
   render() {
     const { bill } = this.props;
     const sach = bill.sach;
-    console.log(sach);
     return (
       <div>
         <Row gutter={16}>

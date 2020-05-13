@@ -63,7 +63,7 @@ class BooktItemForCart extends Component {
   };
 
   UpdateCart = async quantity => {
-    const uid = firebase.auth().currentUser.uid;
+    const uid = localStorage.getItem("user_id");
     const id_book = this.state.book.id;
     await db
       .doc(`gio_hang/${uid}/sach/${id_book}`)
@@ -77,7 +77,7 @@ class BooktItemForCart extends Component {
   };
 
   DeleteBookOnCart= async() =>{
-    const uid = firebase.auth().currentUser.uid;
+    const uid = localStorage.getItem("user_id");
     const id_book = this.state.book.id;
     await db
       .doc(`gio_hang/${uid}/sach/${id_book}`)
