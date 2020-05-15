@@ -7,10 +7,8 @@ import {
   hideMessage,
   showAuthLoader,
   userFacebookSignIn,
-  userGithubSignIn,
   userGoogleSignIn,
   userSignUp,
-  userTwitterSignIn
 } from "appRedux/actions/Auth";
 
 import IntlMessages from "util/IntlMessages";
@@ -129,18 +127,7 @@ class SignUp extends React.Component {
                         this.props.userFacebookSignIn();
                       }}/>
                     </li>
-                    <li>
-                      <Icon type="github" onClick={() => {
-                        this.props.showAuthLoader();
-                        this.props.userGithubSignIn();
-                      }}/>
-                    </li>
-                    <li>
-                      <Icon type="twitter" onClick={() => {
-                        this.props.showAuthLoader();
-                        this.props.userTwitterSignIn();
-                      }}/>
-                    </li>
+
                   </ul>
                 </div>
               </Form>
@@ -174,6 +161,4 @@ export default connect(mapStateToProps, {
   showAuthLoader,
   userFacebookSignIn,
   userGoogleSignIn,
-  userGithubSignIn,
-  userTwitterSignIn
 })(WrappedSignUpForm);

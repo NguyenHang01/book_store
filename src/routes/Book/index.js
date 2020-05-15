@@ -75,8 +75,10 @@ class BookDetail extends Component {
 
   render() {
     const { book, quantity } = this.state;
-    const { chi_tiet } = book;
+    const chi_tiet = book.chi_tiet + " ";
+    const arr  = chi_tiet.replace(/\n/g, " ").split("  ");
     const gia_ban= Math.floor(book.gia_bia * (1 - book.chiet_khau / 100));
+    console.log(arr);
     return (
       <div>
         <Card>
@@ -140,7 +142,11 @@ class BookDetail extends Component {
           </Row>
           <Row>
             <Col span={20} pull={2} push={2}>
-              <div style={{ marginTop: 30 }}>{chi_tiet}</div>
+              <div style={{ marginTop: 30 }}>
+                {arr.map((doan, index)=>(
+                  <h5 id={index}>{doan}</h5>
+                ))}
+              </div>
             </Col>
           </Row>
         </Card>

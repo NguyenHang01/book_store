@@ -5,9 +5,7 @@ import {
   ON_SHOW_LOADER,
   SHOW_MESSAGE,
   SIGNIN_FACEBOOK_USER_SUCCESS,
-  SIGNIN_GITHUB_USER_SUCCESS,
   SIGNIN_GOOGLE_USER_SUCCESS,
-  SIGNIN_TWITTER_USER_SUCCESS,
   SIGNIN_USER_SUCCESS,
   SIGNOUT_USER_SUCCESS,
   SIGNUP_USER_SUCCESS
@@ -78,20 +76,6 @@ export default (state = INIT_STATE, action) => {
       }
     }
     case SIGNIN_FACEBOOK_USER_SUCCESS: {
-      return {
-        ...state,
-        loader: false,
-        authUser: action.payload
-      }
-    }
-    case SIGNIN_TWITTER_USER_SUCCESS: {
-      return {
-        ...state,
-        loader: false,
-        authUser: action.payload
-      }
-    }
-    case SIGNIN_GITHUB_USER_SUCCESS: {
       return {
         ...state,
         loader: false,

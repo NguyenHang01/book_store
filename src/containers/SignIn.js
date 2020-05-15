@@ -7,10 +7,8 @@ import {
   hideMessage,
   showAuthLoader,
   userFacebookSignIn,
-  userGithubSignIn,
   userGoogleSignIn,
   userSignIn,
-  userTwitterSignIn
 } from "appRedux/actions/Auth";
 import IntlMessages from "util/IntlMessages";
 import CircularProgress from "components/CircularProgress/index";
@@ -114,18 +112,6 @@ class SignIn extends React.Component {
                         this.props.userFacebookSignIn();
                       }}/>
                     </li>
-                    <li>
-                      <Icon type="github" onClick={() => {
-                        this.props.showAuthLoader();
-                        this.props.userGithubSignIn();
-                      }}/>
-                    </li>
-                    <li>
-                      <Icon type="twitter" onClick={() => {
-                        this.props.showAuthLoader();
-                        this.props.userTwitterSignIn();
-                      }}/>
-                    </li>
                   </ul>
                 </div>
                 <span
@@ -159,6 +145,4 @@ export default connect(mapStateToProps, {
   showAuthLoader,
   userFacebookSignIn,
   userGoogleSignIn,
-  userGithubSignIn,
-  userTwitterSignIn
 })(WrappedNormalLoginForm);
