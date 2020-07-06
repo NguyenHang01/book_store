@@ -16,9 +16,40 @@ class ListBanChay extends Component {
     };
   }
 
+  subString=(arr_key)=>{
+    const arr_result = [];
+    for (let i = 0; i < arr_key.length; i++) {
+      let key = "";
+      for (let j = i; j < arr_key.length; j++) {
+        key+=arr_key[j]+' ';
+        arr_result.push(key);
+      }
+    }
+    return arr_result;
+  }
+  addArraySubString=()=>{
+    const db = firebase.firestore();
+    db.collection("sach")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let data = doc.data();
+          let id = doc.id;
+          let name = data.ten.toLowerCase();
+          const arr_key = [];
+          name.split(' ').forEach(a => {
+            arr_key.push(a);
+          });
+          let arr_result=this.subString(arr_key);
+          db.collection('sach').doc(id).update({arr_result: arr_result})
+        });
+      });
+  }
+
   componentDidMount() {
     let bestSellerList = [];
     const db = firebase.firestore();
+   // this.addArraySubString();
     db.collection("sach")
       .orderBy("da_ban", "desc")
       .limit(15)
@@ -51,9 +82,9 @@ class ListBanChay extends Component {
       <div className="gx-main-content">
         <Row>
           <Col span={24}>
-            <CardBox  >
+            <CardBox>
               <Link to={`/ban_chay`}>
-              <h2>Sách bán chạy</h2>
+                <h2>Sách bán chạy</h2>
               </Link>
               <Slider {...options1}>
                 {bestSellerList.map(book => (
