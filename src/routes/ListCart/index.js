@@ -91,15 +91,6 @@ class ListCart extends Component {
       <div>
         <div className="gx-main-content">
           <div>
-            {/* <div style={{ float: "left", width: "70%" }}>
-              {listBook.map((book, index) => (
-                <Row style={{ width: 720 }}>
-                  <Col key={index} span={24}>
-                    <BooktItemForCart key={index} id_book={book} />
-                  </Col>
-                </Row>
-              ))}
-            </div> */}
             {listBook.length === 0
               ? this.renderEmpty()
               : this.renderListBook(listBook)}
