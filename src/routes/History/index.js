@@ -10,8 +10,8 @@ const style = { padding: "3px 0" };
 class History extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      listBill:[],
+    this.state = {
+      listBill: []
     };
   }
 
@@ -20,7 +20,8 @@ class History extends Component {
     const uid = localStorage.getItem("user_id");
     console.log(uid);
 
-    await db.collection("don_hang")
+    await db
+      .collection("don_hang")
       .where("uid", "==", uid)
       .get()
       .then(snapshot => {
@@ -31,43 +32,46 @@ class History extends Component {
         });
       })
       .catch();
-      this.setState({listBill:listBill})
+    this.setState({ listBill: listBill });
   }
 
   render() {
-    const {listBill}=this.state;
+    const { listBill } = this.state;
     return (
       <div>
         <div>
-        <Row gutter={16}>
-          <Col className="gutter-row" span={4}>
-            <div style={style}>Ngày đặt hàng</div>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <div style={style}>Trạng thái</div>
-          </Col>
-          <Col className="gutter-row" span={6}>
-            <div style={style}>Sản phẩm</div>
-          </Col>
-          <Col className="gutter-row" span={3}>
-            <div style={style}>Số lượng</div>
-          </Col>
-          <Col className="gutter-row" span={3}>
-            <div style={style}>Giá tiền</div>
-          </Col>
-          <Col className="gutter-row" span={4}>
-            <div style={style}>Tổng tiền</div>
-          </Col>
-        </Row>
-      </div>
-        {listBill.map(bill=>(
+          <Row gutter={16}>
+            <Col className="gutter-row" span={4}>
+              <div style={style}>Ngày đặt hàng</div>
+            </Col>
+            <Col className="gutter-row" span={4}>
+              <div style={style}>Trạng thái</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>Sản phẩm</div>
+            </Col>
+            <Col className="gutter-row" span={3}>
+              <div style={style}>Số lượng</div>
+            </Col>
+            <Col className="gutter-row" span={3}>
+              <div style={style}>Giá tiền</div>
+            </Col>
+            <Col className="gutter-row" span={4}>
+              <div style={style}>Tổng tiền</div>
+            </Col>
+          </Row>
+        </div>
+        {listBill.map(bill => (
           <div>
-          <Divider orientation="left" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
-          <HistoryItem bill={bill}/>
+            <Divider
+              orientation="left"
+              style={{ color: "#333", fontWeight: "normal" }}
+            ></Divider>
+            <HistoryItem bill={bill} />
           </div>
         ))}
       </div>
-    )
+    );
   }
 }
 export default History;

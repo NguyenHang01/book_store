@@ -69,14 +69,11 @@ class Order extends Component {
       })
       .then(() => {
         this.openNotificationWithIcon("success", "Đặt hàng thành công!!!");
-        // <Redirect to="/home"></Redirect>;
-        // ()=>{<Redirect to="/home"></Redirect>}
       });
   };
 
   deleteCart = (listBook, uid) => {
     listBook.forEach(book => {
-
       //Xoa document book.id trong gio hang
       db.doc(`gio_hang/${uid}/sach/${book.id}`)
         .delete()
