@@ -47,9 +47,7 @@ class HorizontalDark extends Component {
   state = {
     searchText: "",
     result: [],
-    category: "",
-    router: "",
-    re: 0
+    category: 'sach',
   };
 
   handleChangeCategory = value => {
@@ -74,10 +72,11 @@ class HorizontalDark extends Component {
   );
 
   searchResult = async query => {
+    const {category} =this.state;
     const db = firebase.firestore();
     query += " ";
     const snapshot = await db
-      .collection("sach")
+      .collection(category)
       .where("arr_result", "array-contains", query.toLowerCase())
       .get();
     let arr = [];
@@ -95,8 +94,22 @@ class HorizontalDark extends Component {
   };
 
   onSelect = value => {
-    const router = "/book/" + value;
-    this.setState({ router: router, re: 1 });
+    let router = '';
+    switch(this.state.category){
+      case 'sach':
+        router = '/book/';
+        break;
+      case 'nxb':
+        router = '/id_nxb/';
+        break;
+      case 'tac-gia':
+        router = '/id_tg/';
+        break;
+      case 'the-loai':
+        router = '/id_the_loai/';
+        break;
+    }
+    router+=value;
     this.props.history.push(router)
   };
 
