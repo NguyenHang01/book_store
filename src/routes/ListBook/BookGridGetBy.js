@@ -45,7 +45,7 @@ class BookGridGetBy extends Component {
     const { list_book } = this.state;
     return (
       <div>
-        <CardBox heading="Tất cả sách">
+        <CardBox heading="">
           <Row>
             {list_book.map((book, index) => (
               <Col key={index} xl={6} md={8} sm={12} xs={24}>

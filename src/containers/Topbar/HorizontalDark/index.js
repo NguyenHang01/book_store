@@ -156,7 +156,8 @@ class HorizontalDark extends Component {
                 <AutoComplete
                   dropdownMatchSelectWidth={252}
                   style={{
-                    width: 300
+                    width: 300,
+                    color: 'white'
                   }}
                   options={searchText}
                   onSelect={this.onSelect}
@@ -170,7 +171,7 @@ class HorizontalDark extends Component {
                 </AutoComplete>
                 <Select
                   defaultValue="sach"
-                  style={{ width: 120 }}
+                  style={{ width: 120, color:"while" }}
                   onChange={this.handleChangeCategory}
                 >
                   <Option value="sach">Sách</Option>

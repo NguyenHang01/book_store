@@ -72,6 +72,10 @@ class Order extends Component {
       });
   };
 
+  updateSach = ()=>{
+
+  }
+
   deleteCart = (listBook, uid) => {
     listBook.forEach(book => {
       //Xoa document book.id trong gio hang
@@ -85,11 +89,11 @@ class Order extends Component {
         });
 
       //Update so_luong sach  trong document "sach/book.id"
-      const bookRef = db.doc(`sach/${book.id}`);
+      const ref = db.collection('sach').doc(book.id);
       db.runTransaction(transaction => {
-        return transaction.get(bookRef).then(doc => {
+        return transaction.get(ref).then(doc => {
           let new_so_luong = doc.data().so_luong - book.so_luong;
-          transaction.update(bookRef, { so_luong: new_so_luong });
+          transaction.update(ref, { so_luong: new_so_luong });
         });
       });
     });

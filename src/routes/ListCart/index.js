@@ -75,11 +75,11 @@ class ListCart extends Component {
     return (
       <div style={{ float: "left", width: "70%" }}>
         <Card>
-        <Row style={{ width: 720 }}>
-          <Col span={24}>
-            <div>Không có sản phẩm nào trong giỏ hàng</div>
-          </Col>
-        </Row>
+          <Row style={{ width: 720 }}>
+            <Col span={24}>
+              <div>Không có sản phẩm nào trong giỏ hàng</div>
+            </Col>
+          </Row>
         </Card>
       </div>
     );

@@ -10,11 +10,11 @@ class UserInfo extends Component {
   render() {
     const photoURL = localStorage.getItem("PhotoURL");
     const userMenuOptions = (
-      <ul className="gx-user-popover">
-        <Link to={`/history`}>
-        <li>Lịch sử đặt hàng</li>
+      <ul className="gx-user-popover" >
+        <Link to={`/history`} >
+        <li >Lịch sử đặt hàng</li>
         </Link>
-        <li onClick={() => this.props.userSignOut()}>Đăng xuất</li>
+        <li style={{color: "while"}} onClick={() => this.props.userSignOut()}>Đăng xuất</li>
       </ul>
     );
 

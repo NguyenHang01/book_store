@@ -16,6 +16,8 @@ class ListTacGia extends Component {
   }
 
   componentDidMount() {
+    const user = firebase.auth().currentUser;
+    console.log(user);
     let list_tac_gia = [];
     const db = firebase.firestore();
     db.collection("tac-gia")

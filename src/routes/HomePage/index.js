@@ -8,7 +8,7 @@ import ListTheLoai from "../../components/HomePage/ListTheLoai";
 const HomePage = () => {
   return (
     <div>
-      <ListBanChay />
+      {/* <ListBanChay /> */}
       <BookGrid />
       <ListTacGia/>
       <ListNXB/>

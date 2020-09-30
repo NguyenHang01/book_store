@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { Col, Row, Card, Divider } from "antd";
+import { Col, Row, Divider } from "antd";
 import firebase from "firebase";
 import HistoryItem from "../../components/HistoryItem";
 
@@ -18,7 +17,6 @@ class History extends Component {
   async componentDidMount() {
     let listBill = [];
     const uid = localStorage.getItem("user_id");
-    console.log(uid);
 
     await db
       .collection("don_hang")
